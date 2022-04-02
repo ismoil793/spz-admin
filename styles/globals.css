@@ -1,0 +1,23 @@
+html,
+body {
+   padding: 0;
+   margin: 0;
+   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+   --primary: #2A55A3;
+   --secondary: #3265C2;
+}
+
+a {
+   color: inherit;
+   text-decoration: none;
+}
+
+* {
+   box-sizing: border-box;
+}
+
+.spz-table {
+   max-height: calc(100vh - 64px - 100px);
+   overflow-y: auto;
+}
