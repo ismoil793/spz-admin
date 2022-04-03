@@ -26,6 +26,9 @@ export default function CategoryMainPage() {
          name_ru: 'Подшипники',
          name_uz: 'Podshipniklar',
          name_en: 'Bearings',
+         description_ru: 'Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя',
+         description_uz: 'Kontaktlar, termal va oraliq o\'rni, motorni himoya qilish o\'chirgichlari',
+         description_en: 'Contactors, thermal and intermediate relays, motor protection circuit breakers',
       },
       {
          id: 2,
@@ -33,6 +36,9 @@ export default function CategoryMainPage() {
          name_ru: 'Валы',
          name_uz: 'Val',
          name_en: 'Shafts',
+         description_ru: 'Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя',
+         description_uz: 'Kontaktlar, termal va oraliq o\'rni, motorni himoya qilish o\'chirgichlari',
+         description_en: 'Contactors, thermal and intermediate relays, motor protection circuit breakers',
       },
       {
          id: 3,
@@ -40,6 +46,9 @@ export default function CategoryMainPage() {
          name_ru: 'Подшипники',
          name_uz: 'Podshipniklar',
          name_en: 'Bearings',
+         description_ru: 'Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя',
+         description_uz: 'Kontaktlar, termal va oraliq o\'rni, motorni himoya qilish o\'chirgichlari',
+         description_en: 'Contactors, thermal and intermediate relays, motor protection circuit breakers',
       },
       {
          id: 4,
@@ -47,6 +56,9 @@ export default function CategoryMainPage() {
          name_ru: 'Валы',
          name_uz: 'Val',
          name_en: 'Shafts',
+         description_ru: 'Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя',
+         description_uz: 'Kontaktlar, termal va oraliq o\'rni, motorni himoya qilish o\'chirgichlari',
+         description_en: 'Contactors, thermal and intermediate relays, motor protection circuit breakers',
       },
       {
          id: 5,
@@ -54,6 +66,9 @@ export default function CategoryMainPage() {
          name_ru: 'Подшипники',
          name_uz: 'Podshipniklar',
          name_en: 'Bearings',
+         description_ru: 'Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя',
+         description_uz: 'Kontaktlar, termal va oraliq o\'rni, motorni himoya qilish o\'chirgichlari',
+         description_en: 'Contactors, thermal and intermediate relays, motor protection circuit breakers',
       },
       {
          id: 6,
@@ -61,6 +76,9 @@ export default function CategoryMainPage() {
          name_ru: 'Валы',
          name_uz: 'Val',
          name_en: 'Shafts',
+         description_ru: 'Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя',
+         description_uz: 'Kontaktlar, termal va oraliq o\'rni, motorni himoya qilish o\'chirgichlari',
+         description_en: 'Contactors, thermal and intermediate relays, motor protection circuit breakers',
       },
       {
          id: 7,
@@ -68,6 +86,9 @@ export default function CategoryMainPage() {
          name_ru: 'Подшипники',
          name_uz: 'Podshipniklar',
          name_en: 'Bearings',
+         description_ru: 'Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя',
+         description_uz: 'Kontaktlar, termal va oraliq o\'rni, motorni himoya qilish o\'chirgichlari',
+         description_en: 'Contactors, thermal and intermediate relays, motor protection circuit breakers',
       },
       {
          id: 8,
@@ -123,11 +144,10 @@ export default function CategoryMainPage() {
    const [activeCategoryId, setActiveCategoryId] = useState(null);
 
    const toggleDeleteModal = (id) => {
-      if(isDeleteModalOpen) {
-         setActiveCategoryId(null)
-      }
-      else {
-         setActiveCategoryId(id)
+      if (isDeleteModalOpen) {
+         setActiveCategoryId(null);
+      } else {
+         setActiveCategoryId(id);
       }
       setDeleteModalOpen(prev => !prev);
    };
@@ -142,25 +162,45 @@ export default function CategoryMainPage() {
       return categories.map(cat => (
          <TableRow key={cat.id}>
             <TableCell>{cat.id}</TableCell>
-            <TableCell>{cat.name_ru}</TableCell>
-            <TableCell>{cat.name_uz}</TableCell>
-            <TableCell>{cat.name_en}</TableCell>
-            <TableCell>{cat.slug}</TableCell>
+            <TableCell>
+               <span className={'fw-500'}>{cat.name_ru}</span>
+               <br />
+               <div className={'cell-desc'}>
+                  {cat.description_ru}
+               </div>
+            </TableCell>
+            <TableCell>
+               <span className={'fw-500'}>{cat.name_uz}</span>
+               <br />
+               <div className={'cell-desc'}>
+                  {cat.description_uz}
+               </div>
+            </TableCell>
+            <TableCell>
+               <span className={'fw-500'}>{cat.name_en}</span>
+               <br />
+               <div className={'cell-desc'}>
+                  {cat.description_en}
+               </div>
+            </TableCell>
+            <TableCell>
+               <div className={'cell-slug'}>{cat.slug}</div>
+            </TableCell>
             <TableCell className={'actions-cell'}>
-               <Tooltip title='Добавить'>
-                  <Link href='/'>
-                     <a>
+               <Link href='/'>
+                  <a>
+                     <Tooltip title='Добавить подкатегоию'>
                         <IconButton variant='contained' color='primary'><AddIcon /></IconButton>
-                     </a>
-                  </Link>
-               </Tooltip>
-               <Tooltip title='Изменить'>
-                  <Link href='/'>
-                     <a>
+                     </Tooltip>
+                  </a>
+               </Link>
+               <Link href='/'>
+                  <a>
+                     <Tooltip title='Изменить'>
                         <IconButton variant='contained' color='secondary'><EditIcon /></IconButton>
-                     </a>
-                  </Link>
-               </Tooltip>
+                     </Tooltip>
+                  </a>
+               </Link>
                <Tooltip title='Удалить'>
                   <IconButton
                      onClick={() => toggleDeleteModal(cat.id)}
@@ -195,10 +235,16 @@ export default function CategoryMainPage() {
                         <Table className={'category-table'}>
                            <TableHead>
                               <TableRow>
-                                 <TableCell>ID категории</TableCell>
-                                 <TableCell>Название ru</TableCell>
-                                 <TableCell>Название uz</TableCell>
-                                 <TableCell>Название en</TableCell>
+                                 <TableCell>ID</TableCell>
+                                 <TableCell>
+                                    Название/Описание <span className={'flag-bg ru'}>ru</span>
+                                 </TableCell>
+                                 <TableCell>
+                                    Название/Описание <span className={'flag-bg uz'}>uz</span>
+                                 </TableCell>
+                                 <TableCell>
+                                    Название/Описание <span className={'flag-bg en'}>en</span>
+                                 </TableCell>
                                  <TableCell>Slug</TableCell>
                                  <TableCell>Действие</TableCell>
                               </TableRow>

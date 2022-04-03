@@ -21,7 +21,7 @@ const LoginForm = () => {
       const expires = new Date();
       expires.setDate(today.getDate() + 10);
 
-      cookies.set('admin-sign-in', token, {
+      cookies.set('vZDA92AO3e0g', token, {
          path: '/',
          expires,
       });

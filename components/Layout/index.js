@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Footer from '../Footer';
+// import Footer from '../Footer';
 import Sidebar from '../Sidebar';
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/router';
@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
    const { push } = useRouter();
 
    useEffect(() => {
-      const token = cookies.get('admin-sign-in');
+      const token = cookies.get('vZDA92AO3e0g');
 
       if (!token || token?.length !== 64) {
          push('/login');
