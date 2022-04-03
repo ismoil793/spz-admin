@@ -183,9 +183,6 @@ export default function CategoryMainPage() {
                   {cat.description_en}
                </div>
             </TableCell>
-            <TableCell>
-               <div className={'cell-slug'}>{cat.slug}</div>
-            </TableCell>
             <TableCell className={'actions-cell'}>
                <Link href='/'>
                   <a>
@@ -218,7 +215,7 @@ export default function CategoryMainPage() {
    return (
       <section className={'category-main'}>
 
-         <div className={'d-flex justify-content-between align-items-center'}>
+         <div className={'top-head'}>
             <h2>Список Категорий</h2>
             <Link href='/'>
                <a>
@@ -245,7 +242,6 @@ export default function CategoryMainPage() {
                                  <TableCell>
                                     Название/Описание <span className={'flag-bg en'}>en</span>
                                  </TableCell>
-                                 <TableCell>Slug</TableCell>
                                  <TableCell>Действие</TableCell>
                               </TableRow>
                            </TableHead>

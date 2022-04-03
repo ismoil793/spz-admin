@@ -1,18 +1,12 @@
 import React from 'react';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import MailIcon from '@mui/icons-material/Mail';
+import {ListItem, ListItemIcon, ListItemText, Divider, List} from '@mui/material';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import HomeIcon from '@mui/icons-material/Home';
 import CategoryIcon from '@mui/icons-material/Category';
 import PhoneIcon from '@mui/icons-material/Phone';
 import Logout from '@mui/icons-material/Logout';
 import Link from 'next/link';
-import List from '@mui/material/List';
 import { useRouter } from 'next/router';
-import Divider from '@mui/material/Divider';
 import Cookies from 'universal-cookie';
 
 const NavItems = () => {
@@ -35,30 +29,15 @@ const NavItems = () => {
          text: 'Главная',
       },
       {
-         path: '/category',
-         icon: <CategoryIcon {...iconProps('/category')} />,
-         text: 'Категории',
+         path: '/sub-category',
+         icon: <CategoryIcon {...iconProps('/sub-category')} />,
+         text: 'Суб Категории',
       },
       {
-         path: '/clients',
-         icon: <BarChartIcon {...iconProps('/clients')} />,
-         text: 'Клиенты',
+         path: '/products',
+         icon: <ShoppingCart {...iconProps('/products')} />,
+         text: 'Продукты',
       },
-      // {
-      //    path: '/contact',
-      //    icon: <BarChartIcon {...iconProps('/contact')} />,
-      //    text: 'Starred',
-      // },
-      // {
-      //    path: '/contact',
-      //    icon: <PhoneIcon {...iconProps('/contact')} />,
-      //    text: 'Send email',
-      // },
-      // {
-      //    path: '/test',
-      //    icon: <BugReportIcon {...iconProps('/test')} />,
-      //    text: 'Drafts',
-      // },
    ];
 
    const navItemsFooter = [

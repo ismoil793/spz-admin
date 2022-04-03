@@ -293,6 +293,15 @@ section.category-main {
 }
 
 section.category-main {
+
+  .top-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px; 
+  }
+
   .category-table {
     .actions-cell {
       button {
