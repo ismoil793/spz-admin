@@ -31,7 +31,7 @@ const NavItems = () => {
       {
          path: '/sub-category',
          icon: <CategoryIcon {...iconProps('/sub-category')} />,
-         text: 'Суб Категории',
+         text: 'Подкатегории',
       },
       {
          path: '/products',

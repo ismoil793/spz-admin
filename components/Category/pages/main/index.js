@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import Link from 'next/link';
 import ChoiceModal from '../../../Modal/ChoiceModal';
 
@@ -191,10 +191,21 @@ export default function CategoryMainPage() {
                      </Tooltip>
                   </a>
                </Link>
-               <Link href='/'>
+               {/*
+               href={{
+                    pathname: '/product/[product]',
+                    query: {product: slug}
+                 }}
+                 as={`/product/${slug}`}
+               */}
+               <Link href={{
+                  pathname: '/category[id]', query: { id: cat.id },
+               }}
+                     as={`/category/${cat.id}`}
+               >
                   <a>
-                     <Tooltip title='Изменить'>
-                        <IconButton variant='contained' color='secondary'><EditIcon /></IconButton>
+                     <Tooltip title='Просмотр/Изменить'>
+                        <IconButton variant='contained' color='secondary'><VisibilityIcon /></IconButton>
                      </Tooltip>
                   </a>
                </Link>
@@ -213,7 +224,7 @@ export default function CategoryMainPage() {
    };
 
    return (
-      <section className={'category-main'}>
+      <section className={'category-main default-section'}>
 
          <div className={'top-head'}>
             <h2>Список Категорий</h2>

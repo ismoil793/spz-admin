@@ -25,3 +25,7 @@ a {
 .fw-500 {
    font-weight: 500;
 }
+
+section.default-section {
+   padding: 0.2rem 2rem 0 2rem;
+}
