@@ -6,7 +6,7 @@ import {
   API_updateProduct,
 } from "../../api/requests/product";
 import * as action from "../types/actionTypes";
-import { logRequestError } from "./errorHandler";
+import logRequestError from "./errorHandler";
 
 export const fetchProduct = (id) => async (dispatch) => {
   await API_getProduct(id)

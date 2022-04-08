@@ -1,6 +1,6 @@
 import * as axios from "axios";
 // import Cookies from "universal-cookie";
-import { keys } from "./constants";
+import keys from "./constants";
 import { notifyError, notifyWarn } from "../components/NotifyButton";
 
 const httpClient = axios.create({

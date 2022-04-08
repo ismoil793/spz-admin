@@ -6,7 +6,7 @@ import {
   API_updateCategory,
 } from "../../api/requests/category";
 import * as action from "../types/actionTypes";
-import { logRequestError } from "./errorHandler";
+import logRequestError from "./errorHandler";
 
 export const fetchCategory = (id) => async (dispatch) => {
   await API_getCategory(id)

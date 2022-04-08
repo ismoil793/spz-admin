@@ -6,7 +6,7 @@ import {
   API_updateSubCategory,
 } from "../../api/requests/subcategory";
 import * as action from "../types/actionTypes";
-import { logRequestError } from "./errorHandler";
+import logRequestError from "./errorHandler";
 
 export const fetchSubCategory = (id) => async (dispatch) => {
   await API_getSubCategory(id)
