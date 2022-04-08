@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 // import Footer from '../Footer';
 import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import Sidebar from "../Sidebar";
 
 function Layout({ children }) {
@@ -29,10 +29,10 @@ function Layout({ children }) {
 }
 
 Layout.propTypes = {
-   children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
-   ]).isRequired
-}
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+};
 
 export default Layout;

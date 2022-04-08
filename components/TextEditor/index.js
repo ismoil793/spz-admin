@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 // import htmlToDraft from 'html-to-draftjs';
 
 const Editor = dynamic(

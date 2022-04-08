@@ -21,8 +21,8 @@ function NavItems() {
   const isActive = (path) => pathname === path;
 
   const iconProps = (path) => ({
-      color: isActive(path) ? "primary" : "",
-    });
+    color: isActive(path) ? "primary" : "",
+  });
 
   const navItems = [
     {
@@ -51,7 +51,7 @@ function NavItems() {
   ];
 
   const renderNavItems = (navElements) =>
-     navElements && navElements.length ? (
+    navElements && navElements.length ? (
       <List>
         {navElements.map((item) => (
           <Link href={item.path} key={item.text}>

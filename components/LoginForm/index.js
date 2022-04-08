@@ -44,38 +44,40 @@ function LoginForm() {
 
   return (
     <form onSubmit={submitForm} autoComplete="off">
-        <div className="wrap-input validate-input">
-          <input
-            className="input"
-            required
-            type="text"
-            name="uName"
-            placeholder="Имя пользователя"
-            value={uName}
-            onChange={(e) => setUName(e.target.value)}
-            autoComplete="off"
-          />
-          <PhoneIcon className="focus-input user" />
-        </div>
+      <div className="wrap-input validate-input">
+        <input
+          className="input"
+          required
+          type="text"
+          name="uName"
+          placeholder="Имя пользователя"
+          value={uName}
+          onChange={(e) => setUName(e.target.value)}
+          autoComplete="off"
+        />
+        <PhoneIcon className="focus-input user" />
+      </div>
 
-        <div className="wrap-input validate-input">
-          <input
-            className="input"
-            type="password"
-            name="password-spz-bearings"
-            placeholder="Пароль"
-            value={password}
-            required
-            autoComplete="new-password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Lock className="focus-input password" />
-        </div>
+      <div className="wrap-input validate-input">
+        <input
+          className="input"
+          type="password"
+          name="password-spz-bearings"
+          placeholder="Пароль"
+          value={password}
+          required
+          autoComplete="new-password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Lock className="focus-input password" />
+      </div>
 
-        <div>
-          <button className="login-form-btn" type="button">Вход</button>
-        </div>
-      </form>
+      <div>
+        <button className="login-form-btn" type="button">
+          Вход
+        </button>
+      </div>
+    </form>
   );
 }
 

@@ -32,6 +32,7 @@
     "react/jsx-props-no-spreading": "off",
     "import/no-duplicates": "warn",
     "import/prefer-default-export": "warn",
-    "no-shadow": "off"
+    "no-shadow": "off",
+    "camelcase": "off"
   }
 }

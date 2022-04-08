@@ -1,6 +1,6 @@
 import React from "react";
 import { Autocomplete, TextField } from "@mui/material";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const top100Films = [
   { label: "The Shawshank Redemption", year: 1994 },
@@ -37,7 +37,7 @@ function ParentCategoryInfo({ isSubCategory }) {
 }
 
 ParentCategoryInfo.propTypes = {
-   isSubCategory: PropTypes.bool,
+  isSubCategory: PropTypes.bool,
 };
 
 export default ParentCategoryInfo;
