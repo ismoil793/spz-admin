@@ -400,6 +400,15 @@ section.category-page {
          width: 100%;
       }
    }
+
+   .image-upload {
+      max-width: 500px;
+      max-height: 400px;
+   }
+
+   &.create { // category-create-page
+
+   }
 }
 
 /*End Category Pag*/

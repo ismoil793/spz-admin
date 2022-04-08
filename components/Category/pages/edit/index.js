@@ -4,7 +4,7 @@ import CategoryInfo from '../../reusables/CategoryInfo';
 import MediaInfo from '../../reusables/MediaInfo';
 import SeoInfo from '../../reusables/SeoInfo';
 
-const CategoryEdit = ({ isSubCategory = false, isProduct = false, isCreate = false }) => {
+const CategoryEdit = ({ isSubCategory = false, isProduct = false, isCreate = false, formData, setFormData }) => {
 
    const [mounted, setMounted] = useState(false);
 
@@ -23,10 +23,10 @@ const CategoryEdit = ({ isSubCategory = false, isProduct = false, isCreate = fal
          }
          {
             mounted &&
-            <CategoryInfo />
+            <CategoryInfo formData={formData} setFormData={setFormData} />
          }
-         <MediaInfo />
-         <SeoInfo />
+         <MediaInfo formData={formData} setFormData={setFormData} />
+         <SeoInfo formData={formData} setFormData={setFormData} />
       </>
    );
 };
