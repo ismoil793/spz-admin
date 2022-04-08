@@ -17,7 +17,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import Link from 'next/link';
 import ChoiceModal from '../../../Modal/ChoiceModal';
 
-export default function CategoryMainPage() {
+export default function CategoryMainPage({ isSubCategory }) {
 
    const [categories, setCategories] = useState([
       {
@@ -143,6 +143,8 @@ export default function CategoryMainPage() {
    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
    const [activeCategoryId, setActiveCategoryId] = useState(null);
 
+   const path = isSubCategory ? '/sub-category' : '/category';
+
    const toggleDeleteModal = (id) => {
       if (isDeleteModalOpen) {
          setActiveCategoryId(null);
@@ -162,6 +164,9 @@ export default function CategoryMainPage() {
       return categories.map(cat => (
          <TableRow key={cat.id}>
             <TableCell>{cat.id}</TableCell>
+            <TableCell>
+               <img className='cell-img' src='https://via.placeholder.com/50x50' alt='Placeholder image' />
+            </TableCell>
             <TableCell>
                <span className={'fw-500'}>{cat.name_ru}</span>
                <br />
@@ -184,24 +189,19 @@ export default function CategoryMainPage() {
                </div>
             </TableCell>
             <TableCell className={'actions-cell'}>
-               <Link href='/'>
-                  <a>
-                     <Tooltip title='Добавить подкатегоию'>
-                        <IconButton variant='contained' color='primary'><AddIcon /></IconButton>
-                     </Tooltip>
-                  </a>
-               </Link>
-               {/*
-               href={{
-                    pathname: '/product/[product]',
-                    query: {product: slug}
-                 }}
-                 as={`/product/${slug}`}
-               */}
-               <Link href={{
-                  pathname: '/category[id]', query: { id: cat.id },
-               }}
-                     as={`/category/${cat.id}`}
+               {/*<Link href='/'>*/}
+               {/*   <a>*/}
+               {/*      <Tooltip title='Добавить подкатегоию'>*/}
+               {/*         <IconButton variant='contained' color='primary'><AddIcon /></IconButton>*/}
+               {/*      </Tooltip>*/}
+               {/*   </a>*/}
+               {/*</Link>*/}
+
+               <Link
+                  href={{
+                     pathname: `${path}/[id]`, query: { id: cat.id },
+                  }}
+                  as={`${path}/${cat.id}`}
                >
                   <a>
                      <Tooltip title='Просмотр/Изменить'>
@@ -227,10 +227,12 @@ export default function CategoryMainPage() {
       <section className={'category-main default-section'}>
 
          <div className={'top-head'}>
-            <h2>Список Категорий</h2>
-            <Link href='/'>
+            <h2>Список {isSubCategory ? 'Подкатегорий' : 'Категорий'}</h2>
+            <Link href={`${path}/create`}>
                <a>
-                  <Button variant='contained'><AddIcon /> Новая категория</Button>
+                  <Button variant='contained'>
+                     <AddIcon /> Новая {isSubCategory && 'под'}категория
+                  </Button>
                </a>
             </Link>
          </div>
@@ -244,6 +246,7 @@ export default function CategoryMainPage() {
                            <TableHead>
                               <TableRow>
                                  <TableCell>ID</TableCell>
+                                 <TableCell>Фото</TableCell>
                                  <TableCell>
                                     Название/Описание <span className={'flag-bg ru'}>ru</span>
                                  </TableCell>

@@ -318,6 +318,10 @@ section.category-main {
             color: var(--secondary);
             font-weight: 500;
          }
+         &-img {
+            object-fit: cover;
+            transform: scale(1.2);
+         }
       }
    }
 }
@@ -402,7 +406,7 @@ section.category-page {
 
 /*-----------------------------------------------Text Editor */
 .text-editor-wrapper {
-   background: #eee;
+   background: #f1f1f1;
 
    .DraftEditor-root {
       min-height: 300px;
