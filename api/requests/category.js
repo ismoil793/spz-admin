@@ -1,27 +1,30 @@
 import { httpDelete, httpGet, httpPost } from "../index";
 
-
-export const API_getCategory = (id, params = {}) => httpGet({
+export const API_getCategory = (id, params = {}) =>
+  httpGet({
     url: `/api/get-categories/${id}`,
-    params
-});
+    params,
+  });
 
-export const API_getCategories = (params = {}) => httpGet({
+export const API_getCategories = (params = {}) =>
+  httpGet({
     url: "/api/get-categories",
-    params
-});
+    params,
+  });
 
-export const API_createCategory = (data) => httpPost({
+export const API_createCategory = (data) =>
+  httpPost({
     url: "/api/create-category",
-    data
-})
+    data,
+  });
 
-export const API_updateCategory = (id, data) => httpPost({
+export const API_updateCategory = (id, data) =>
+  httpPost({
     url: `/api/update-category/${id}`,
-    data
-})
+    data,
+  });
 
-
-export const API_deleteCategory = (id) => httpDelete({
-    url: `/api/delete-category/${id}`
-})
+export const API_deleteCategory = (id) =>
+  httpDelete({
+    url: `/api/delete-category/${id}`,
+  });

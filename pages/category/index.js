@@ -1,6 +1,5 @@
-import CategoryMainPage from '../../components/Category/pages/main';
+import CategoryMainPage from "../../components/Category/pages/main";
 
 export default function Category() {
-
-   return <CategoryMainPage />;
-};
+  return <CategoryMainPage />;
+}

@@ -4,9 +4,9 @@ import subCategory from "./subCategory";
 import product from "./product";
 
 const rootReducer = combineReducers({
-    category,
-    subCategory,
-    product
+  category,
+  subCategory,
+  product,
 });
 
 export default rootReducer;

@@ -1,27 +1,30 @@
 import { httpDelete, httpGet, httpPost } from "../index";
 
-
-export const API_getProduct = (id, params = {}) => httpGet({
+export const API_getProduct = (id, params = {}) =>
+  httpGet({
     url: `/api/get-products/${id}`,
-    params
-});
+    params,
+  });
 
-export const API_getProducts = (params = {}) => httpGet({
+export const API_getProducts = (params = {}) =>
+  httpGet({
     url: "/api/get-products",
-    params
-});
+    params,
+  });
 
-export const API_createProduct = (data) => httpPost({
+export const API_createProduct = (data) =>
+  httpPost({
     url: "/api/create-product",
-    data
-})
+    data,
+  });
 
-export const API_updateProduct = (id, data) => httpPost({
+export const API_updateProduct = (id, data) =>
+  httpPost({
     url: `/api/update-product/${id}`,
-    data
-})
+    data,
+  });
 
-
-export const API_deleteProduct = (id) => httpDelete({
-    url: `/api/delete-product/${id}`
-})
+export const API_deleteProduct = (id) =>
+  httpDelete({
+    url: `/api/delete-product/${id}`,
+  });

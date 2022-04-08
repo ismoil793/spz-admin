@@ -1,32 +1,30 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-const allowedUsers = process.env.allowedUsers;
+const {allowedUsers} = process.env;
 
 function makeid(length) {
-   let result = '';
-   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-   const charactersLength = characters.length;
-   for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() *
-         charactersLength));
-   }
-   return result;
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i+1) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 }
 
 export default function handler(req, res) {
-   const { body, method, headers } = req;
+  const { body, method } = req;
 
-   const { uName, password } = body;
+  const { uName, password } = body;
 
-   if (method === 'POST') {
-      const token = makeid(64);
+  if (method === "POST") {
+    const token = makeid(64);
 
-      const idx = allowedUsers?.findIndex(user =>
-         user.uName === uName && user.password === password,
-      );
+    const idx = allowedUsers?.findIndex(
+      (user) => user.uName === uName && user.password === password
+    );
 
-      if (idx > -1)
-         return res.status(200).json({ token, success: true });
-
-   }
-   return res.status(200).json({ message: 'Fuck you, bitch!' });
+    if (idx > -1) return res.status(200).json({ token, success: true });
+  }
+  return res.status(200).json({ message: "Fuck you, bitch!" });
 }
