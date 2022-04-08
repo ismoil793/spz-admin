@@ -21,7 +21,6 @@ function MyApp(props) {
     Component,
     emotionCache = clientSideEmotionCache,
     pageProps,
-    // eslint-disable-next-line react/prop-types
     router,
   } = props;
 
@@ -42,14 +41,11 @@ function MyApp(props) {
           height={3}
           showOnShallow
         />
-        {/* eslint-disable-next-line react/prop-types */}
         {router.pathname !== "/login" ? (
           <Layout>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
             <Component {...pageProps} />
           </Layout>
         ) : (
-          // eslint-disable-next-line react/jsx-props-no-spreading
           <Component {...pageProps} />
         )}
       </ThemeProvider>
@@ -61,6 +57,9 @@ MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
   emotionCache: PropTypes.shape({}),
   pageProps: PropTypes.shape({}),
+  router: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
 };
 
 export default wrapper.withRedux(MyApp); /* connection of redux */
