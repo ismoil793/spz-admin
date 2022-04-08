@@ -8,7 +8,6 @@ function SubCategoryPage() {
 
   const onSubCategoryEditSubmit = (e) => {
     e.preventDefault();
-    console.log("onSubCategoryEditSubmit");
   };
 
   return (

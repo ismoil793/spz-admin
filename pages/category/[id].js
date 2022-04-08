@@ -8,7 +8,6 @@ function CategoryPage() {
 
   const onCategoryEdit = (e) => {
     e.preventDefault();
-    console.log("onCategoryEdit");
   };
 
   return (
