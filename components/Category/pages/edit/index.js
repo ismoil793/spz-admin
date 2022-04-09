@@ -18,6 +18,11 @@ function CategoryEdit({
     setMounted(true);
   }, []);
 
+  const defaultProps = {
+    formData,
+    setFormData,
+  };
+
   return (
     <>
       {isSubCategory && (
@@ -26,11 +31,9 @@ function CategoryEdit({
           isProduct={isProduct}
         />
       )}
-      {mounted && (
-        <CategoryInfo formData={formData} setFormData={setFormData} />
-      )}
-      <MediaInfo formData={formData} setFormData={setFormData} />
-      <SeoInfo formData={formData} setFormData={setFormData} />
+      {mounted && <CategoryInfo {...defaultProps} />}
+      <MediaInfo {...defaultProps} />
+      <SeoInfo {...defaultProps} />
     </>
   );
 }

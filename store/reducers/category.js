@@ -20,7 +20,10 @@ const categoryReducer = (state = initialState, action = {}) => {
       return { ...state, category: action.payload };
 
     case actions.DELETE_CATEGORY:
-      return { ...state, category: action.payload };
+      return { ...state };
+
+    case actions.CLEAR_CATEGORY:
+      return { ...state, category: {} };
 
     default:
       return state;

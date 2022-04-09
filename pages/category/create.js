@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import CategoryEdit from "../../components/Category/pages/edit";
 import { CategoryFormData } from "../../components/Category/utils/constants";
 import { convertToFormData } from "../../components/Category/utils/helpers";
-import { createCategory } from "../../store/actions/category";
+import {
+  clearCategory,
+  createCategory,
+  fetchAllCategories,
+} from "../../store/actions/category";
+import { notifySuccess } from "../../components/NotifyButton";
 
 function CategoryCreatePage() {
   const [formData, setFormData] = useState(CategoryFormData);
+  const { category } = useSelector((state) => state.category);
+  const { push } = useRouter();
   const dispatch = useDispatch();
 
   const onCategoryCreate = (e) => {
@@ -15,6 +23,22 @@ function CategoryCreatePage() {
     const convertedData = convertToFormData("category", formData);
     dispatch(createCategory(convertedData));
   };
+
+  useEffect(
+    () => () => {
+      // on unmount
+      dispatch(clearCategory());
+    },
+    []
+  );
+
+  useEffect(async () => {
+    if (category.status) {
+      await dispatch(fetchAllCategories());
+      notifySuccess("Успешно создано");
+      push("/");
+    }
+  }, [category]);
 
   return (
     <section className="category-page create default-section">

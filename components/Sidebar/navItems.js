@@ -28,7 +28,7 @@ function NavItems() {
     {
       path: "/",
       icon: <HomeIcon {...iconProps("/")} />,
-      text: "Главная",
+      text: "Категории",
     },
     {
       path: "/sub-category",
@@ -38,7 +38,7 @@ function NavItems() {
     {
       path: "/products",
       icon: <ShoppingCart {...iconProps("/products")} />,
-      text: "Продукты",
+      text: "Товары",
     },
   ];
 

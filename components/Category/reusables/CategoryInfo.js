@@ -11,21 +11,21 @@ function CategoryInfo({ formData, setFormData }) {
   useEffect(() => {
     setFormData((prev) => ({
       ...prev,
-      description_ru: "descriptionRu",
+      description_ru: descriptionRu,
     }));
   }, [descriptionRu]);
 
   useEffect(() => {
     setFormData((prev) => ({
       ...prev,
-      description_uz: "descriptionUz",
+      description_uz: descriptionUz,
     }));
   }, [descriptionUz]);
 
   useEffect(() => {
     setFormData((prev) => ({
       ...prev,
-      description_en: "descriptionEn",
+      description_en: descriptionEn,
     }));
   }, [descriptionEn]);
 

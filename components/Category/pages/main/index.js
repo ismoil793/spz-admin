@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Paper,
   Table,
@@ -15,115 +15,14 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import moment from "moment";
 import ChoiceModal from "../../../Modal/ChoiceModal";
-import { fetchAllCategories } from "../../../../store/actions/category";
+import keys from "../../../../api/constants";
 
-function CategoryMainPage({ isSubCategory }) {
-  const [categories, setCategories] = useState([
-    {
-      id: 1,
-      slug: "/podshipniki",
-      name_ru: "Подшипники",
-      name_uz: "Podshipniklar",
-      name_en: "Bearings",
-      description_ru:
-        "Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя",
-      description_uz:
-        "Kontaktlar, termal va oraliq o'rni, motorni himoya qilish o'chirgichlari",
-      description_en:
-        "Contactors, thermal and intermediate relays, motor protection circuit breakers",
-    },
-    {
-      id: 2,
-      slug: "/vali",
-      name_ru: "Валы",
-      name_uz: "Val",
-      name_en: "Shafts",
-      description_ru:
-        "Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя",
-      description_uz:
-        "Kontaktlar, termal va oraliq o'rni, motorni himoya qilish o'chirgichlari",
-      description_en:
-        "Contactors, thermal and intermediate relays, motor protection circuit breakers",
-    },
-    {
-      id: 3,
-      slug: "/podshipniki",
-      name_ru: "Подшипники",
-      name_uz: "Podshipniklar",
-      name_en: "Bearings",
-      description_ru:
-        "Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя",
-      description_uz:
-        "Kontaktlar, termal va oraliq o'rni, motorni himoya qilish o'chirgichlari",
-      description_en:
-        "Contactors, thermal and intermediate relays, motor protection circuit breakers",
-    },
-    {
-      id: 4,
-      slug: "/vali",
-      name_ru: "Валы",
-      name_uz: "Val",
-      name_en: "Shafts",
-      description_ru:
-        "Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя",
-      description_uz:
-        "Kontaktlar, termal va oraliq o'rni, motorni himoya qilish o'chirgichlari",
-      description_en:
-        "Contactors, thermal and intermediate relays, motor protection circuit breakers",
-    },
-    {
-      id: 5,
-      slug: "/podshipniki",
-      name_ru: "Подшипники",
-      name_uz: "Podshipniklar",
-      name_en: "Bearings",
-      description_ru:
-        "Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя",
-      description_uz:
-        "Kontaktlar, termal va oraliq o'rni, motorni himoya qilish o'chirgichlari",
-      description_en:
-        "Contactors, thermal and intermediate relays, motor protection circuit breakers",
-    },
-    {
-      id: 6,
-      slug: "/vali",
-      name_ru: "Валы",
-      name_uz: "Val",
-      name_en: "Shafts",
-      description_ru:
-        "Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя",
-      description_uz:
-        "Kontaktlar, termal va oraliq o'rni, motorni himoya qilish o'chirgichlari",
-      description_en:
-        "Contactors, thermal and intermediate relays, motor protection circuit breakers",
-    },
-    {
-      id: 7,
-      slug: "/podshipniki",
-      name_ru: "Подшипники",
-      name_uz: "Podshipniklar",
-      name_en: "Bearings",
-      description_ru:
-        "Контакторы, тепловые и промежуточные реле, автоматы для защиты двигателя",
-      description_uz:
-        "Kontaktlar, termal va oraliq o'rni, motorni himoya qilish o'chirgichlari",
-      description_en:
-        "Contactors, thermal and intermediate relays, motor protection circuit breakers",
-    },
-  ]);
+function CategoryMainPage({ isSubCategory, data, handleDelete }) {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState(null);
-  const dispatch = useDispatch();
-  const { categories: c } = useSelector((state) => state.category);
-
-  useEffect(() => {
-    dispatch(fetchAllCategories());
-  }, []);
-
-  console.log(c);
 
   const path = isSubCategory ? "/sub-category" : "/category";
 
@@ -136,35 +35,41 @@ function CategoryMainPage({ isSubCategory }) {
     setDeleteModalOpen((prev) => !prev);
   };
 
-  const deleteCategory = () => {
-    setCategories([...categories.filter((cat) => cat.id !== activeCategoryId)]);
+  console.log(data);
+
+  const deleteCallback = () => {
+    handleDelete(activeCategoryId);
   };
 
   const renderCategories = () =>
-    categories.map((cat) => (
+    data?.length &&
+    data.map((cat) => (
       <TableRow key={cat.id}>
         <TableCell>{cat.id}</TableCell>
         <TableCell>
           <img
             className="cell-img"
-            src="https://api.spz-bearings.uz/api/62505901bb5f421649432833.jpg"
+            src={`${keys.BASE_URL}/${cat.image}`}
             alt="Placeholder of category"
           />
         </TableCell>
         <TableCell>
-          <span className="fw-500">{cat.name_ru}</span>
+          <span className="fw-500">{cat.title_ru}</span>
           <br />
           <div className="cell-desc">{cat.description_ru}</div>
         </TableCell>
         <TableCell>
-          <span className="fw-500">{cat.name_uz}</span>
+          <span className="fw-500">{cat.title_uz}</span>
           <br />
           <div className="cell-desc">{cat.description_uz}</div>
         </TableCell>
         <TableCell>
-          <span className="fw-500">{cat.name_en}</span>
+          <span className="fw-500">{cat.title_en}</span>
           <br />
           <div className="cell-desc">{cat.description_en}</div>
+        </TableCell>
+        <TableCell>
+          {moment(cat.created_at).format("DD.MM.YYYY, h:mm")}
         </TableCell>
         <TableCell className="actions-cell">
           {/* <Link href='/'> */}
@@ -235,6 +140,7 @@ function CategoryMainPage({ isSubCategory }) {
                       <TableCell>
                         Название/Описание <span className="flag-bg en">en</span>
                       </TableCell>
+                      <TableCell>Дата создания</TableCell>
                       <TableCell>Действие</TableCell>
                     </TableRow>
                   </TableHead>
@@ -249,7 +155,7 @@ function CategoryMainPage({ isSubCategory }) {
       <ChoiceModal
         open={isDeleteModalOpen}
         onClose={toggleDeleteModal}
-        callback={deleteCategory}
+        callback={deleteCallback}
       />
     </section>
   );
@@ -257,6 +163,8 @@ function CategoryMainPage({ isSubCategory }) {
 
 CategoryMainPage.propTypes = {
   isSubCategory: PropTypes.bool,
+  data: PropTypes.shape([]),
+  handleDelete: PropTypes.func,
 };
 
 CategoryMainPage.defaultProps = {

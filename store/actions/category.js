@@ -7,6 +7,7 @@ import {
 } from "../../api/requests/category";
 import * as action from "../types/actionTypes";
 import logRequestError from "./errorHandler";
+import { notifyError } from "../../components/NotifyButton";
 
 export const fetchCategory = (id) => async (dispatch) => {
   await API_getCategory(id)
@@ -24,7 +25,7 @@ export const fetchAllCategories = () => async (dispatch) => {
     .then((res) => {
       dispatch({
         type: action.FETCH_CATEGORIES,
-        payload: res.data,
+        payload: res.data.data,
       });
     })
     .catch((e) => logRequestError(e));
@@ -39,6 +40,12 @@ export const createCategory = (data) => async (dispatch) => {
       });
     })
     .catch((e) => logRequestError(e));
+};
+
+export const clearCategory = () => async (dispatch) => {
+  dispatch({
+    type: action.CLEAR_CATEGORY,
+  });
 };
 
 export const updateCategory = (id, data) => async (dispatch) => {
@@ -59,6 +66,7 @@ export const deleteCategory = (id) => async (dispatch) => {
         type: action.DELETE_CATEGORY,
         payload: res.data,
       });
+      notifyError("Удалено");
     })
     .catch((e) => logRequestError(e));
 };
