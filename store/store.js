@@ -19,4 +19,5 @@ const initialState = {};
 
 const initStore = () => createStore(rootReducer, initialState, enhancer);
 
+// eslint-disable-next-line import/prefer-default-export
 export const wrapper = createWrapper(initStore);
