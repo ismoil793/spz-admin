@@ -35,8 +35,6 @@ function CategoryMainPage({ isSubCategory, data, handleDelete }) {
     setDeleteModalOpen((prev) => !prev);
   };
 
-  console.log(data);
-
   const deleteCallback = () => {
     handleDelete(activeCategoryId);
   };
