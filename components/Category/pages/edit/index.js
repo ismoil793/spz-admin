@@ -26,7 +26,7 @@ function CategoryEdit({
 
   return (
     <>
-      {isSubCategory && (
+      {(isSubCategory || isProduct) && (
         <ParentCategoryInfo
           formData={formData}
           setFormData={setFormData}
@@ -34,14 +34,22 @@ function CategoryEdit({
           isProduct={isProduct}
         />
       )}
-      {mounted && <CategoryInfo {...defaultProps} />}
+      {mounted && (
+        <CategoryInfo
+          {...defaultProps}
+          isProduct={isProduct}
+          isSubCategory={isSubCategory}
+        />
+      )}
       <MediaInfo
         isSubCategory={isSubCategory}
+        isProduct={isProduct}
         isEdit={isEdit}
         {...defaultProps}
       />
       {isSubCategory || isProduct ? (
         <FeaturesInfo
+          isProduct={isProduct}
           isSubCategory={isSubCategory}
           formData={formData}
           setFormData={setFormData}

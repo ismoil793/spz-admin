@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Button, TextField } from "@mui/material";
 import { arr2obj } from "../utils/helpers";
 
-function FeaturesInfo({ setFormData, isSubCategory }) {
+function FeaturesInfo({ setFormData, isSubCategory, isProduct }) {
   const [specsList, setSpecsList] = useState([["", ""]]);
 
   const handleSpecAdd = () => {
@@ -22,9 +22,10 @@ function FeaturesInfo({ setFormData, isSubCategory }) {
 
   const lastSpecElementBlur = () => {
     const stringifyObject = JSON.stringify(arr2obj(specsList));
+    const specsName = isProduct ? "dynamic_features" : "specs";
     setFormData((prev) => ({
       ...prev,
-      specs: stringifyObject,
+      [specsName]: stringifyObject,
     }));
   };
 
@@ -86,6 +87,7 @@ function FeaturesInfo({ setFormData, isSubCategory }) {
 
 FeaturesInfo.propTypes = {
   isSubCategory: PropTypes.bool,
+  isProduct: PropTypes.bool,
   setFormData: PropTypes.func,
 };
 

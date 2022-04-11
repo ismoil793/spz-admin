@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import TextEditor from "../../TextEditor";
 
-function CategoryInfo({ formData, setFormData }) {
+function CategoryInfo({ formData, setFormData, isSubCategory, isProduct }) {
   const [descriptionRu, setDescriptionRu] = useState(formData.description_ru);
   const [descriptionUz, setDescriptionUz] = useState(formData.description_uz);
   const [descriptionEn, setDescriptionEn] = useState(formData.description_en);
@@ -36,13 +36,21 @@ function CategoryInfo({ formData, setFormData }) {
     }));
   };
 
+  let labelName = "категории";
+
+  if (isSubCategory) {
+    labelName = "подкатегории";
+  } else if (isProduct) {
+    labelName = "товара";
+  }
+
   return (
     <>
       <div className="row">
         <div className="col-lg-4">
           <TextField
             className="category-title"
-            label="Имя категории RU"
+            label={`Имя ${labelName} RU`}
             variant="outlined"
             value={formData.title_ru}
             required
@@ -53,7 +61,7 @@ function CategoryInfo({ formData, setFormData }) {
         <div className="col-lg-4">
           <TextField
             className="category-title"
-            label="Имя категории UZ"
+            label={`Имя ${labelName} UZ`}
             variant="outlined"
             value={formData.title_uz}
             required
@@ -64,7 +72,7 @@ function CategoryInfo({ formData, setFormData }) {
         <div className="col-lg-4">
           <TextField
             className="category-title"
-            label="Имя категории EN"
+            label={`Имя ${labelName} EN`}
             variant="outlined"
             value={formData.title_en}
             required
@@ -133,6 +141,8 @@ CategoryInfo.propTypes = {
     description_en: PropTypes.string,
   }),
   setFormData: PropTypes.func,
+  isProduct: PropTypes.bool,
+  isSubCategory: PropTypes.bool,
 };
 
 export default CategoryInfo;

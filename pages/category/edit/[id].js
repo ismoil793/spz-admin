@@ -6,12 +6,17 @@ import CategoryEdit from "../../../components/Category/pages/edit";
 import { CategoryFormData } from "../../../components/Category/utils/constants";
 import keys from "../../../api/constants";
 import { convertToFormData } from "../../../components/Category/utils/helpers";
-import { updateCategory } from "../../../store/actions/category";
+import {
+  clearCategory,
+  fetchAllCategories,
+  updateCategory,
+} from "../../../store/actions/category";
+import { notifySuccess } from "../../../components/NotifyButton";
 
 function CategoryPage() {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const [formData, setFormData] = useState(CategoryFormData);
-  const { categories } = useSelector((state) => state.category);
+  const { categories, category } = useSelector((state) => state.category);
   const dispatch = useDispatch();
   const [currentCategory, setCurrentCategory] = useState({});
 
@@ -35,6 +40,22 @@ function CategoryPage() {
       }
     }
   }, [categories]);
+
+  useEffect(
+    () => () => {
+      // on unmount
+      dispatch(clearCategory());
+    },
+    []
+  );
+
+  useEffect(async () => {
+    if (category.status) {
+      await dispatch(fetchAllCategories());
+      notifySuccess("Успешно обновлено");
+      push("/");
+    }
+  }, [category]);
 
   return (
     <section className="category-page default-section">

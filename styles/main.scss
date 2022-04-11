@@ -37,6 +37,7 @@
   margin-left: 1rem;
 }
 
+/*================================================= Begin Modals*/
 .clients-data-grid {
   .MuiDataGrid-row {
     .MuiDataGrid-cell {
@@ -48,7 +49,7 @@
   }
 }
 
-.client-modal {
+.products-modal {
   position: absolute;
   width: 80%;
   height: 85%;
@@ -59,54 +60,6 @@
   padding: 1% 2% 2% 2%;
   z-index: 2;
   background: #fff;
-
-  .modal-loader {
-    height: 100%;
-  }
-
-  .credits-modal {
-    .main-info {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .credit {
-      list-style: none;
-      padding: 0;
-
-      &:after {
-        //content: "";
-        //display: block;
-        //border-bottom: 1px solid #ccc;
-      }
-
-      li {
-        border: 1px solid #e0e0e0;
-        padding: 5px 10px;
-        margin-bottom: 10px;
-
-        &:hover {
-          background: #fafafa;
-        }
-      }
-    }
-
-    .clinet-table {
-      margin-top: 20px;
-
-      .status {
-        background: #ccc;
-        padding: 2px 8px;
-        font-size: 12px;
-        border-radius: 5px;
-
-        &.s-1 {
-          background: #368900;
-          color: #fff;
-        }
-      }
-    }
-  }
 }
 
 .choice-modal {
@@ -123,6 +76,7 @@
   border-radius: 4px;
   text-align: center;
 }
+/*================================================= End Modals*/
 
 /*================================================= Begin login*/
 .login-section {
@@ -291,7 +245,8 @@
 /*End login*/
 
 /*================================================= Begin Category*/
-section.category-main {
+section.category-main,
+.products-modal {
   .top-head {
     display: flex;
     justify-content: space-between;
@@ -299,7 +254,8 @@ section.category-main {
     position: relative;
     box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
   }
-
+}
+section.category-main {
   .category-table {
     .actions-cell {
       button {
@@ -325,6 +281,9 @@ section.category-main {
         height: 50px;
         object-fit: cover;
         transform: scale(1.2);
+      }
+      &-show-products {
+        text-transform: capitalize;
       }
     }
   }

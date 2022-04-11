@@ -2,29 +2,18 @@ import {
   API_createProduct,
   API_deleteProduct,
   API_getProduct,
-  API_getProducts,
   API_updateProduct,
 } from "../../api/requests/product";
 import * as action from "../types/actionTypes";
 import logRequestError from "./errorHandler";
+import { notifyError } from "../../components/NotifyButton";
 
-export const fetchProduct = (id) => async (dispatch) => {
-  await API_getProduct(id)
-    .then((res) => {
-      dispatch({
-        type: action.FETCH_PRODUCT,
-        payload: res.data,
-      });
-    })
-    .catch((e) => logRequestError(e));
-};
-
-export const fetchAllProducts = () => async (dispatch) => {
-  await API_getProducts()
+export const fetchProducts = (subCategoryID) => async (dispatch) => {
+  await API_getProduct(subCategoryID)
     .then((res) => {
       dispatch({
         type: action.FETCH_PRODUCTS,
-        payload: res.data,
+        payload: res.data.data,
       });
     })
     .catch((e) => logRequestError(e));
@@ -39,6 +28,12 @@ export const createProduct = (data) => async (dispatch) => {
       });
     })
     .catch((e) => logRequestError(e));
+};
+
+export const clearProduct = () => async (dispatch) => {
+  dispatch({
+    type: action.CLEAR_PRODUCT,
+  });
 };
 
 export const updateProduct = (id, data) => async (dispatch) => {
@@ -58,7 +53,9 @@ export const deleteProduct = (id) => async (dispatch) => {
       dispatch({
         type: action.DELETE_PRODUCT,
         payload: res.data,
+        prodID: id,
       });
+      notifyError("Удалено");
     })
     .catch((e) => logRequestError(e));
 };

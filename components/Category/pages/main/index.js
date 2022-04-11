@@ -19,9 +19,11 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import ChoiceModal from "../../../Modal/ChoiceModal";
 import keys from "../../../../api/constants";
+import ProductsModal from "../../../Modal/ProductsModal";
 
 function CategoryMainPage({ isSubCategory, data, handleDelete, parentID }) {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [isProductsModalOpen, setProductsModalOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState(null);
 
   const path = isSubCategory ? "/sub-category" : "/category/edit";
@@ -33,6 +35,15 @@ function CategoryMainPage({ isSubCategory, data, handleDelete, parentID }) {
       setActiveCategoryId(id);
     }
     setDeleteModalOpen((prev) => !prev);
+  };
+
+  const toggleProductsModal = (id) => {
+    if (isProductsModalOpen) {
+      setActiveCategoryId(null);
+    } else {
+      setActiveCategoryId(id);
+    }
+    setProductsModalOpen((prev) => !prev);
   };
 
   const deleteCallback = () => {
@@ -63,14 +74,32 @@ function CategoryMainPage({ isSubCategory, data, handleDelete, parentID }) {
           <TableCell>
             {moment(cat.created_at).format("DD.MM.YYYY, h:mm")}
           </TableCell>
+          {isSubCategory && (
+            <TableCell>
+              <Button
+                className="cell-show-products"
+                variant="outlined"
+                color="secondary"
+                onClick={() => toggleProductsModal(cat.id)}
+              >
+                Показать товары
+              </Button>
+            </TableCell>
+          )}
           <TableCell className="actions-cell">
-            {/* <Link href='/'> */}
-            {/*   <a> */}
-            {/*      <Tooltip title='Добавить подкатегоию'> */}
-            {/*         <IconButton variant='contained' color='primary'><AddIcon /></IconButton> */}
-            {/*      </Tooltip> */}
-            {/*   </a> */}
-            {/* </Link> */}
+            {isSubCategory && (
+              <Link
+                href={`/product/create?parentID=${cat.id}&categoryID=${parentID}`}
+              >
+                <a>
+                  <Tooltip title="Добавить товар">
+                    <IconButton variant="contained" color="primary">
+                      <AddIcon />
+                    </IconButton>
+                  </Tooltip>
+                </a>
+              </Link>
+            )}
 
             <Link
               href={{
@@ -144,6 +173,7 @@ function CategoryMainPage({ isSubCategory, data, handleDelete, parentID }) {
                         Название <span className="flag-bg en">en</span>
                       </TableCell>
                       <TableCell>Дата создания</TableCell>
+                      {isSubCategory && <TableCell>Товары</TableCell>}
                       <TableCell>Действие</TableCell>
                     </TableRow>
                   </TableHead>
@@ -159,6 +189,12 @@ function CategoryMainPage({ isSubCategory, data, handleDelete, parentID }) {
         open={isDeleteModalOpen}
         onClose={toggleDeleteModal}
         callback={deleteCallback}
+      />
+
+      <ProductsModal
+        activeCategoryId={activeCategoryId}
+        open={isProductsModalOpen}
+        onClose={toggleProductsModal}
       />
     </section>
   );

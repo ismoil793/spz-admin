@@ -17,9 +17,9 @@ const subCategoryReducer = (state = initialState, action = {}) => {
       return { ...state, subCategory: action.payload };
 
     case actions.DELETE_SUB_CATEGORY:
-      return { ...state, subCategory: action.payload };
+      return { ...state };
 
-    case actions.CLEAR_CATEGORY:
+    case actions.CLEAR_SUB_CATEGORY:
       return { ...state, subCategory: {} };
 
     default:

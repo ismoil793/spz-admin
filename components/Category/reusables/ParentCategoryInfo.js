@@ -4,11 +4,19 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
-function ParentCategoryInfo({ isSubCategory, setFormData }) {
+function ParentCategoryInfo({ isSubCategory, setFormData, isProduct }) {
   const { categories } = useSelector((state) => state.category);
-  const getCategoryLabels = () =>
-    categories?.length &&
-    categories.map((cat) => ({ label: cat.title_ru, value: cat.id }));
+  const { subCategories } = useSelector((state) => state.subCategory);
+
+  const nameID = isProduct ? "sub_category_id" : "category_id";
+
+  const getCategoryLabels = () => {
+    const data = isProduct ? subCategories : categories;
+    return (
+      data?.length &&
+      data.map((cat) => ({ label: cat.title_ru, value: cat.id }))
+    );
+  };
 
   const { query } = useRouter();
 
@@ -16,7 +24,7 @@ function ParentCategoryInfo({ isSubCategory, setFormData }) {
     if (query.parentID) {
       setFormData((prev) => ({
         ...prev,
-        category_id: query.parentID,
+        [nameID]: query.parentID,
       }));
     }
   }, [query]);
@@ -24,7 +32,7 @@ function ParentCategoryInfo({ isSubCategory, setFormData }) {
   const handleDropdownChange = (_, changeVal) => {
     setFormData((prev) => ({
       ...prev,
-      category_id: changeVal?.value || "",
+      [nameID]: changeVal?.value || "",
     }));
   };
 
@@ -46,9 +54,14 @@ function ParentCategoryInfo({ isSubCategory, setFormData }) {
           options={categoryLabels}
           onChange={handleDropdownChange}
           value={defaultLabel}
+          disabled
           // sx={{ width: 300 }}
           renderInput={(params) => (
-            <TextField {...params} label="Категория" required />
+            <TextField
+              {...params}
+              label={isProduct ? "Субкатегория" : "Категория"}
+              required
+            />
           )}
         />
       </div>
@@ -59,6 +72,7 @@ function ParentCategoryInfo({ isSubCategory, setFormData }) {
 ParentCategoryInfo.propTypes = {
   formData: PropTypes.shape({}),
   isSubCategory: PropTypes.bool,
+  isProduct: PropTypes.bool,
   setFormData: PropTypes.func,
 };
 

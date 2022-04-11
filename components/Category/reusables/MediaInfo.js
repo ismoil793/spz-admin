@@ -8,7 +8,7 @@ const Input = styled("input")({
   display: "none",
 });
 
-function MediaInfo({ formData = {}, setFormData, isSubCategory }) {
+function MediaInfo({ formData = {}, setFormData, isSubCategory, isProduct }) {
   const { imageUrl } = formData;
 
   const handleImageUpload = (e) => {
@@ -65,30 +65,34 @@ function MediaInfo({ formData = {}, setFormData, isSubCategory }) {
 
   return (
     <div className="row">
-      <div className="col-lg-12">
-        <h4>Фотограия (500x400)</h4>
-      </div>
-      <div className="col-lg-12">
-        <img className="image-upload" src={imageUrl} alt="upload" />
-        <div>
-          <label htmlFor="icon-button-file">
-            <Input
-              accept="image/*"
-              id="icon-button-file"
-              type="file"
-              onChange={handleImageUpload}
-            />
-            Загрузить
-            <IconButton
-              color="primary"
-              aria-label="upload picture"
-              component="span"
-            >
-              <PhotoCamera />
-            </IconButton>
-          </label>
+      {!isProduct && (
+        <div className="col-lg-12">
+          <h4>Фотограия (500x400)</h4>
         </div>
-      </div>
+      )}
+      {!isProduct && (
+        <div className="col-lg-12">
+          <img className="image-upload" src={imageUrl} alt="upload" />
+          <div>
+            <label htmlFor="icon-button-file">
+              <Input
+                accept="image/*"
+                id="icon-button-file"
+                type="file"
+                onChange={handleImageUpload}
+              />
+              Загрузить
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="span"
+              >
+                <PhotoCamera />
+              </IconButton>
+            </label>
+          </div>
+        </div>
+      )}
       {isSubCategory ? (
         <>
           <div className="col-lg-12">
@@ -110,7 +114,21 @@ function MediaInfo({ formData = {}, setFormData, isSubCategory }) {
             {renderImageUploader("gost_image[1]", "Гост 2")}
           </div>
         </>
-      ) : null}
+      ) : (
+        isProduct && (
+          <>
+            <div className="col-lg-12">
+              <h4>Фото карусели товара</h4>
+            </div>
+            <div className="col-lg-6">
+              {renderImageUploader("image[1]", "Фото 1")}
+            </div>
+            <div className="col-lg-6">
+              {renderImageUploader("image[2]", "Фото 2")}
+            </div>
+          </>
+        )
+      )}
     </div>
   );
 }
@@ -121,6 +139,7 @@ MediaInfo.propTypes = {
   }),
   setFormData: PropTypes.func,
   isSubCategory: PropTypes.bool,
+  isProduct: PropTypes.bool,
 };
 
 export default MediaInfo;
