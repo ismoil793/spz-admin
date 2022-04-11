@@ -50,7 +50,11 @@ function CategoryCreatePage() {
           </Button>
         </div>
         <div className="container-fluid p-0">
-          <CategoryEdit formData={formData} setFormData={setFormData} />
+          <CategoryEdit
+            isCreate
+            formData={formData}
+            setFormData={setFormData}
+          />
 
           <div className="row">
             <div className="col-lg-12">

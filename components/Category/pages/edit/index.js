@@ -4,11 +4,12 @@ import ParentCategoryInfo from "../../reusables/ParentCategoryInfo";
 import CategoryInfo from "../../reusables/CategoryInfo";
 import MediaInfo from "../../reusables/MediaInfo";
 import SeoInfo from "../../reusables/SeoInfo";
+import FeaturesInfo from "../../reusables/FeaturesInfo";
 
 function CategoryEdit({
   isSubCategory = false,
   isProduct = false,
-  // isCreate = false,
+  isEdit = false,
   formData,
   setFormData,
 }) {
@@ -27,12 +28,26 @@ function CategoryEdit({
     <>
       {isSubCategory && (
         <ParentCategoryInfo
+          formData={formData}
+          setFormData={setFormData}
           isSubCategory={isSubCategory}
           isProduct={isProduct}
         />
       )}
       {mounted && <CategoryInfo {...defaultProps} />}
-      <MediaInfo {...defaultProps} />
+      <MediaInfo
+        isSubCategory={isSubCategory}
+        isEdit={isEdit}
+        {...defaultProps}
+      />
+      {isSubCategory || isProduct ? (
+        <FeaturesInfo
+          isSubCategory={isSubCategory}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      ) : null}
+
       <SeoInfo {...defaultProps} />
     </>
   );
@@ -41,9 +56,14 @@ function CategoryEdit({
 CategoryEdit.propTypes = {
   isSubCategory: PropTypes.bool,
   isProduct: PropTypes.bool,
-  // isCreate: PropTypes.bool,
+  isEdit: PropTypes.bool,
   formData: PropTypes.shape({}),
   setFormData: PropTypes.func,
+};
+
+CategoryEdit.defaultProps = {
+  formData: {},
+  setFormData: () => {},
 };
 
 export default CategoryEdit;

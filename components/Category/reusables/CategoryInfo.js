@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import TextEditor from "../../TextEditor";
 
 function CategoryInfo({ formData, setFormData }) {
-  const [descriptionRu, setDescriptionRu] = useState();
-  const [descriptionUz, setDescriptionUz] = useState();
-  const [descriptionEn, setDescriptionEn] = useState();
+  const [descriptionRu, setDescriptionRu] = useState(formData.description_ru);
+  const [descriptionUz, setDescriptionUz] = useState(formData.description_uz);
+  const [descriptionEn, setDescriptionEn] = useState(formData.description_en);
 
   useEffect(() => {
     setFormData((prev) => ({
@@ -81,7 +81,11 @@ function CategoryInfo({ formData, setFormData }) {
         </div>
         <div className="col-lg-12">
           <div className="text-editor-wrapper">
-            <TextEditor setEditorHTML={setDescriptionRu} />
+            <TextEditor
+              defaultState={formData?.description_ru}
+              setEditorHTML={setDescriptionRu}
+              formData={formData}
+            />
           </div>
         </div>
       </div>
@@ -98,12 +102,20 @@ function CategoryInfo({ formData, setFormData }) {
         </div>
         <div className="col-lg-6">
           <div className="text-editor-wrapper">
-            <TextEditor setEditorHTML={setDescriptionUz} />
+            <TextEditor
+              defaultState={formData?.description_uz}
+              setEditorHTML={setDescriptionUz}
+              formData={formData}
+            />
           </div>
         </div>
         <div className="col-lg-6">
           <div className="text-editor-wrapper">
-            <TextEditor setEditorHTML={setDescriptionEn} />
+            <TextEditor
+              defaultState={formData?.description_en}
+              setEditorHTML={setDescriptionEn}
+              formData={formData}
+            />
           </div>
         </div>
       </div>
@@ -116,6 +128,9 @@ CategoryInfo.propTypes = {
     title_ru: PropTypes.string,
     title_uz: PropTypes.string,
     title_en: PropTypes.string,
+    description_ru: PropTypes.string,
+    description_uz: PropTypes.string,
+    description_en: PropTypes.string,
   }),
   setFormData: PropTypes.func,
 };

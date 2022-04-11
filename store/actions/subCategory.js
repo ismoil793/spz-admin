@@ -1,34 +1,34 @@
 import {
   API_createSubCategory,
   API_deleteSubCategory,
-  API_getSubCategories,
+  // API_getSubCategories,
   API_getSubCategory,
   API_updateSubCategory,
 } from "../../api/requests/subcategory";
 import * as action from "../types/actionTypes";
 import logRequestError from "./errorHandler";
 
-export const fetchSubCategory = (id) => async (dispatch) => {
-  await API_getSubCategory(id)
+export const fetchSubCategory = (categoryID) => async (dispatch) => {
+  await API_getSubCategory(categoryID)
     .then((res) => {
       dispatch({
-        type: action.FETCH_SUB_CATEGORY,
-        payload: res.data,
+        type: action.FETCH_SUB_CATEGORIES,
+        payload: res.data.data,
       });
     })
     .catch((e) => logRequestError(e));
 };
 
-export const fetchAllSubCategories = () => async (dispatch) => {
-  await API_getSubCategories()
-    .then((res) => {
-      dispatch({
-        type: action.FETCH_SUB_CATEGORIES,
-        payload: res.data,
-      });
-    })
-    .catch((e) => logRequestError(e));
-};
+// export const fetchAllSubCategories = () => async (dispatch) => {
+//   await API_getSubCategories()
+//     .then((res) => {
+//       dispatch({
+//         type: action.FETCH_SUB_CATEGORIES,
+//         payload: res.data,
+//       });
+//     })
+//     .catch((e) => logRequestError(e));
+// };
 
 export const createSubCategory = (data) => async (dispatch) => {
   await API_createSubCategory(data)
@@ -39,6 +39,12 @@ export const createSubCategory = (data) => async (dispatch) => {
       });
     })
     .catch((e) => logRequestError(e));
+};
+
+export const clearSubCategory = () => async (dispatch) => {
+  dispatch({
+    type: action.CLEAR_SUB_CATEGORY,
+  });
 };
 
 export const updateSubCategory = (id, data) => async (dispatch) => {

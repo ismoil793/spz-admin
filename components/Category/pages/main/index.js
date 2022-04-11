@@ -20,11 +20,11 @@ import moment from "moment";
 import ChoiceModal from "../../../Modal/ChoiceModal";
 import keys from "../../../../api/constants";
 
-function CategoryMainPage({ isSubCategory, data, handleDelete }) {
+function CategoryMainPage({ isSubCategory, data, handleDelete, parentID }) {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState(null);
 
-  const path = isSubCategory ? "/sub-category" : "/category";
+  const path = isSubCategory ? "/sub-category" : "/category/edit";
 
   const toggleDeleteModal = (id) => {
     if (isDeleteModalOpen) {
@@ -40,77 +40,82 @@ function CategoryMainPage({ isSubCategory, data, handleDelete }) {
   };
 
   const renderCategories = () =>
-    data?.length &&
-    data.map((cat) => (
-      <TableRow key={cat.id}>
-        <TableCell>{cat.id}</TableCell>
-        <TableCell>
-          <img
-            className="cell-img"
-            src={`${keys.BASE_URL}/${cat.image}`}
-            alt="Placeholder of category"
-          />
-        </TableCell>
-        <TableCell>
-          <span className="fw-500">{cat.title_ru}</span>
-          <br />
-          <div className="cell-desc">{cat.description_ru}</div>
-        </TableCell>
-        <TableCell>
-          <span className="fw-500">{cat.title_uz}</span>
-          <br />
-          <div className="cell-desc">{cat.description_uz}</div>
-        </TableCell>
-        <TableCell>
-          <span className="fw-500">{cat.title_en}</span>
-          <br />
-          <div className="cell-desc">{cat.description_en}</div>
-        </TableCell>
-        <TableCell>
-          {moment(cat.created_at).format("DD.MM.YYYY, h:mm")}
-        </TableCell>
-        <TableCell className="actions-cell">
-          {/* <Link href='/'> */}
-          {/*   <a> */}
-          {/*      <Tooltip title='Добавить подкатегоию'> */}
-          {/*         <IconButton variant='contained' color='primary'><AddIcon /></IconButton> */}
-          {/*      </Tooltip> */}
-          {/*   </a> */}
-          {/* </Link> */}
+    data?.length ? (
+      data.map((cat) => (
+        <TableRow key={cat.id}>
+          <TableCell>{cat.id}</TableCell>
+          <TableCell>
+            <img
+              className="cell-img"
+              src={`${keys.BASE_URL}/${cat.image}`}
+              alt="Placeholder of category"
+            />
+          </TableCell>
+          <TableCell>
+            <span className="fw-500">{cat.title_ru}</span>
+          </TableCell>
+          <TableCell>
+            <span className="fw-500">{cat.title_uz}</span>
+          </TableCell>
+          <TableCell>
+            <span className="fw-500">{cat.title_en}</span>
+          </TableCell>
+          <TableCell>
+            {moment(cat.created_at).format("DD.MM.YYYY, h:mm")}
+          </TableCell>
+          <TableCell className="actions-cell">
+            {/* <Link href='/'> */}
+            {/*   <a> */}
+            {/*      <Tooltip title='Добавить подкатегоию'> */}
+            {/*         <IconButton variant='contained' color='primary'><AddIcon /></IconButton> */}
+            {/*      </Tooltip> */}
+            {/*   </a> */}
+            {/* </Link> */}
 
-          <Link
-            href={{
-              pathname: `${path}/[id]`,
-              query: { id: cat.id },
-            }}
-            as={`${path}/${cat.id}`}
-          >
-            <a>
-              <Tooltip title="Просмотр/Изменить">
-                <IconButton variant="contained" color="secondary">
-                  <VisibilityIcon />
-                </IconButton>
-              </Tooltip>
-            </a>
-          </Link>
-          <Tooltip title="Удалить">
-            <IconButton
-              onClick={() => toggleDeleteModal(cat.id)}
-              variant="contained"
-              color="error"
+            <Link
+              href={{
+                pathname: `${path}/[id]`,
+                query: { id: cat.id },
+              }}
+              as={`${path}/${cat.id}`}
             >
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        </TableCell>
-      </TableRow>
-    ));
+              <a>
+                <Tooltip title="Просмотр/Изменить">
+                  <IconButton variant="contained" color="secondary">
+                    <VisibilityIcon />
+                  </IconButton>
+                </Tooltip>
+              </a>
+            </Link>
+            <Tooltip title="Удалить">
+              <IconButton
+                onClick={() => toggleDeleteModal(cat.id)}
+                variant="contained"
+                color="error"
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+          </TableCell>
+        </TableRow>
+      ))
+    ) : (
+      <div>
+        <h3>Пусто</h3>
+      </div>
+    );
 
   return (
     <section className="category-main default-section">
       <div className="top-head">
         <h2>Список {isSubCategory ? "Подкатегорий" : "Категорий"}</h2>
-        <Link href={`${path}/create`}>
+        <Link
+          href={
+            isSubCategory
+              ? `/sub-category/create?parentID=${parentID}`
+              : "/category/create"
+          }
+        >
           <a>
             <Button variant="contained">
               <AddIcon /> Новая {isSubCategory && "под"}категория
@@ -130,13 +135,13 @@ function CategoryMainPage({ isSubCategory, data, handleDelete }) {
                       <TableCell>ID</TableCell>
                       <TableCell>Фото</TableCell>
                       <TableCell>
-                        Название/Описание <span className="flag-bg ru">ru</span>
+                        Название <span className="flag-bg ru">ru</span>
                       </TableCell>
                       <TableCell>
-                        Название/Описание <span className="flag-bg uz">uz</span>
+                        Название <span className="flag-bg uz">uz</span>
                       </TableCell>
                       <TableCell>
-                        Название/Описание <span className="flag-bg en">en</span>
+                        Название <span className="flag-bg en">en</span>
                       </TableCell>
                       <TableCell>Дата создания</TableCell>
                       <TableCell>Действие</TableCell>
@@ -161,6 +166,7 @@ function CategoryMainPage({ isSubCategory, data, handleDelete }) {
 
 CategoryMainPage.propTypes = {
   isSubCategory: PropTypes.bool,
+  parentID: PropTypes.bool,
   data: PropTypes.shape([]),
   handleDelete: PropTypes.func,
 };

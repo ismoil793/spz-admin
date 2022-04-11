@@ -2,14 +2,11 @@ import * as actions from "../types/actionTypes";
 
 const initialState = {
   category: {},
-  categories: {},
+  categories: [],
 };
 
 const categoryReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case actions.FETCH_CATEGORY:
-      return { ...state, category: action.payload };
-
     case actions.FETCH_CATEGORIES:
       return { ...state, categories: action.payload };
 

@@ -33,6 +33,7 @@
     "import/no-duplicates": "warn",
     "import/prefer-default-export": "warn",
     "no-shadow": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "react/no-array-index-key": "warn"
   }
 }

@@ -1,37 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { Button } from "@mui/material";
-import CategoryEdit from "../../components/Category/pages/edit";
+import CategoryMainPage from "../../components/Category/pages/main";
+import {
+  deleteSubCategory,
+  fetchSubCategory,
+} from "../../store/actions/subCategory";
 
 function CategoryPage() {
+  const dispatch = useDispatch();
+  const { subCategories } = useSelector((state) => state.subCategory);
   const { query } = useRouter();
 
-  const onCategoryEdit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (query.id) dispatch(fetchSubCategory(query.id));
+  }, [query]);
+
+  const handleDeleteCategory = async (id) => {
+    await dispatch(deleteSubCategory(id));
+    await dispatch(fetchSubCategory(query.id));
   };
 
   return (
-    <section className="category-page default-section">
-      <form onSubmit={onCategoryEdit}>
-        <div className="top-head">
-          <h2>Имя категории {query?.id}</h2>
-          <Button variant="contained" type="submit">
-            Сохранить
-          </Button>
-        </div>
-        <div className="container-fluid p-0">
-          <CategoryEdit />
-
-          <div className="row">
-            <div className="col-lg-12">
-              <Button variant="contained" type="submit">
-                Сохранить
-              </Button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </section>
+    <CategoryMainPage
+      parentID={query.id}
+      data={subCategories}
+      handleDelete={handleDeleteCategory}
+      isSubCategory
+    />
   );
 }
 

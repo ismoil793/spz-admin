@@ -3,10 +3,14 @@ import React, { useEffect } from "react";
 import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../Sidebar";
+import { fetchAllCategories } from "../../store/actions/category";
 
 function Layout({ children }) {
   const cookies = new Cookies();
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.category);
   const { push } = useRouter();
 
   useEffect(() => {
@@ -14,7 +18,7 @@ function Layout({ children }) {
 
     if (!token || token?.length !== 64) {
       push("/login");
-    }
+    } else if (!categories?.length) dispatch(fetchAllCategories());
   }, []);
 
   return (

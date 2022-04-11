@@ -25,8 +25,11 @@ export const CategoryFormData = {
 export const SubCategoryFormData = {
   ...formData,
   category_id: "",
-  specs: "",
+  specs: {},
   image: "",
+  imageUrl: "https://via.placeholder.com/500x400",
+  "gost_image[0]": "",
+  "gost_image[1]": "",
   "chertej_image[0]": "",
   "chertej_image[1]": "",
 };

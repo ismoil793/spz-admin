@@ -52,11 +52,8 @@ httpClient.interceptors.response.use(
       // cookies.remove("user_id", { path: '/' })
     }
 
-    if (parseInt(status, 10) === 400 && data.code === 11) {
-      notifyWarn(data.message);
-    }
-    if (parseInt(status, 10) === 400 && data.code === 10) {
-      notifyWarn(data.message);
+    if (parseInt(status, 10) === 400) {
+      notifyError("Неверные данные, убедитесь что все поля заполнены");
     }
 
     if (parseInt(status, 10) === 404) {

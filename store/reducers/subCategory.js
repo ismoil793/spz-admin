@@ -2,14 +2,11 @@ import * as actions from "../types/actionTypes";
 
 const initialState = {
   subCategory: {},
-  subCategories: {},
+  subCategories: [],
 };
 
 const subCategoryReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case actions.FETCH_SUB_CATEGORY:
-      return { ...state, subCategory: action.payload };
-
     case actions.FETCH_SUB_CATEGORIES:
       return { ...state, subCategories: action.payload };
 
@@ -21,6 +18,9 @@ const subCategoryReducer = (state = initialState, action = {}) => {
 
     case actions.DELETE_SUB_CATEGORY:
       return { ...state, subCategory: action.payload };
+
+    case actions.CLEAR_CATEGORY:
+      return { ...state, subCategory: {} };
 
     default:
       return state;

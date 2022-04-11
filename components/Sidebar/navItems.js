@@ -6,7 +6,7 @@ import {
   Divider,
   List,
 } from "@mui/material";
-import ShoppingCart from "@mui/icons-material/ShoppingCart";
+// import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -14,32 +14,37 @@ import Logout from "@mui/icons-material/Logout";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Cookies from "universal-cookie";
+import { useSelector } from "react-redux";
 
 function NavItems() {
   const cookies = new Cookies();
-  const { pathname } = useRouter();
-  const isActive = (path) => pathname === path;
+  const { categories } = useSelector((state) => state.category);
+
+  const { asPath } = useRouter();
+  const isActive = (path) => asPath === path;
 
   const iconProps = (path) => ({
     color: isActive(path) ? "primary" : "",
   });
 
+  const createCategoryLinks = categories.map((cat) => ({
+    path: `/category/${cat.id}`,
+    icon: <CategoryIcon {...iconProps(`/category/${cat.id}`)} />,
+    text: cat.title_ru,
+  }));
+
   const navItems = [
     {
       path: "/",
       icon: <HomeIcon {...iconProps("/")} />,
-      text: "Категории",
+      text: "Все категории",
     },
-    {
-      path: "/sub-category",
-      icon: <CategoryIcon {...iconProps("/sub-category")} />,
-      text: "Подкатегории",
-    },
-    {
-      path: "/products",
-      icon: <ShoppingCart {...iconProps("/products")} />,
-      text: "Товары",
-    },
+    ...createCategoryLinks,
+    // {
+    //   path: "/products",
+    //   icon: <ShoppingCart {...iconProps("/products")} />,
+    //   text: "Товары",
+    // },
   ];
 
   const navItemsFooter = [
