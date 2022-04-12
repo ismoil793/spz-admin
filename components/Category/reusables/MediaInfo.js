@@ -130,10 +130,10 @@ function MediaInfo({
               <h4>Фото карусели товара</h4>
             </div>
             <div className="col-lg-6">
-              {renderImageUploader("image[1]", "Фото 1")}
+              {renderImageUploader("image[0]", "Фото 1")}
             </div>
             <div className="col-lg-6">
-              {renderImageUploader("image[2]", "Фото 2")}
+              {renderImageUploader("image[1]", "Фото 2")}
             </div>
           </>
         )

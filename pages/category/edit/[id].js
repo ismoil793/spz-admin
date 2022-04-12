@@ -61,7 +61,7 @@ function CategoryPage() {
     <section className="category-page default-section">
       <form onSubmit={onCategoryEdit}>
         <div className="top-head">
-          <h2>{currentCategory.title_ru}</h2>
+          <h2>{currentCategory?.title_ru}</h2>
           <Button variant="contained" type="submit">
             Сохранить
           </Button>

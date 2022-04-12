@@ -20,8 +20,8 @@ export const fileNotChanged = (formDataKey, keysValue) => {
     "gost_image[1]",
     "chertej_image[0]",
     "chertej_image[1]",
+    "image[0]",
     "image[1]",
-    "image[2]",
   ];
   const idx = imagesArray.findIndex((img) => img === formDataKey);
   return idx > -1 && typeof keysValue === "string";

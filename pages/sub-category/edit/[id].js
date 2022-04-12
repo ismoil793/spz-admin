@@ -69,7 +69,7 @@ function SubCategoryPage() {
     <section className="category-page default-section">
       <form onSubmit={onSubCategoryEdit}>
         <div className="top-head">
-          <h2>Изменить подкатегорию "{currentSubCategory.title_ru}"</h2>
+          <h2>Изменить подкатегорию "{currentSubCategory?.title_ru}"</h2>
           <Button variant="contained" type="submit">
             Сохранить
           </Button>

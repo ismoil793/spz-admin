@@ -73,7 +73,7 @@ function LoginForm() {
       </div>
 
       <div>
-        <button className="login-form-btn" type="button">
+        <button className="login-form-btn" type="submit">
           Вход
         </button>
       </div>

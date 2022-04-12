@@ -3,7 +3,13 @@ import { TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import TextEditor from "../../TextEditor";
 
-function CategoryInfo({ formData, setFormData, isSubCategory, isProduct }) {
+function CategoryInfo({
+  formData,
+  setFormData,
+  isSubCategory,
+  isProduct,
+  isEdit,
+}) {
   const [descriptionRu, setDescriptionRu] = useState(formData.description_ru);
   const [descriptionUz, setDescriptionUz] = useState(formData.description_uz);
   const [descriptionEn, setDescriptionEn] = useState(formData.description_en);
@@ -93,6 +99,7 @@ function CategoryInfo({ formData, setFormData, isSubCategory, isProduct }) {
               defaultState={formData?.description_ru}
               setEditorHTML={setDescriptionRu}
               formData={formData}
+              isEdit={isEdit}
             />
           </div>
         </div>
@@ -114,6 +121,7 @@ function CategoryInfo({ formData, setFormData, isSubCategory, isProduct }) {
               defaultState={formData?.description_uz}
               setEditorHTML={setDescriptionUz}
               formData={formData}
+              isEdit={isEdit}
             />
           </div>
         </div>
@@ -123,6 +131,7 @@ function CategoryInfo({ formData, setFormData, isSubCategory, isProduct }) {
               defaultState={formData?.description_en}
               setEditorHTML={setDescriptionEn}
               formData={formData}
+              isEdit={isEdit}
             />
           </div>
         </div>
@@ -143,6 +152,7 @@ CategoryInfo.propTypes = {
   setFormData: PropTypes.func,
   isProduct: PropTypes.bool,
   isSubCategory: PropTypes.bool,
+  isEdit: PropTypes.bool,
 };
 
 export default CategoryInfo;

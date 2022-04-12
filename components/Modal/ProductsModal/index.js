@@ -33,7 +33,7 @@ function ProductsModal({ open, onClose, activeCategoryId }) {
       >
         <div className="products-modal">
           <div className="top-head">
-            <h3>Товары в подкатегории "{currentSubCategory.title_ru}"</h3>
+            <h3>Товары в подкатегории "{currentSubCategory?.title_ru}"</h3>
             <Link href={`/product/create?parentID=${activeCategoryId}`}>
               <a>
                 <Button variant="contained">
@@ -42,7 +42,7 @@ function ProductsModal({ open, onClose, activeCategoryId }) {
               </a>
             </Link>
           </div>
-          <ProductsTable />
+          <ProductsTable activeSubCategoryId={activeCategoryId} />
         </div>
       </Modal>
     </div>

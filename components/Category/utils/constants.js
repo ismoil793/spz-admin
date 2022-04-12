@@ -39,5 +39,5 @@ export const ProductFormData = {
   sub_category_id: "",
   "image[1]": "",
   "image[2]": "",
-  dynamic_features: "",
+  dynamic_features: {},
 };

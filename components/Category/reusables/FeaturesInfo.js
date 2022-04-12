@@ -15,19 +15,34 @@ function FeaturesInfo({
   const specsName = isProduct ? "dynamic_features" : "specs";
 
   useEffect(() => {
-    if (isEdit && !defaultUsed && typeof formData[specsName] === "string") {
+    if (
+      isEdit &&
+      !defaultUsed &&
+      typeof formData[specsName] === "string" &&
+      formData[specsName].length
+    ) {
       const parsed = JSON.parse(formData[specsName]);
       setSpecsList([...Object.entries(parsed)]);
       setDefaultUsed(true);
     }
   }, [formData]);
 
+  const updateFormData = (specsData = null) => {
+    const stringifyObject = JSON.stringify(arr2obj(specsData || specsList));
+    setFormData((prev) => ({
+      ...prev,
+      [specsName]: stringifyObject,
+    }));
+  };
+
   const handleSpecAdd = () => {
     setSpecsList((prev) => [...prev, ["", ""]]);
   };
 
   const handleSpecRemove = (idx) => {
-    setSpecsList([...specsList.filter((_, i) => i !== idx)]);
+    const newSpecsList = [...specsList.filter((_, i) => i !== idx)];
+    setSpecsList(newSpecsList);
+    updateFormData(newSpecsList);
   };
 
   const handleSpecsChange = (e, index, position) => {
@@ -37,19 +52,14 @@ function FeaturesInfo({
   };
 
   const lastSpecElementBlur = () => {
-    const stringifyObject = JSON.stringify(arr2obj(specsList));
-    setFormData((prev) => ({
-      ...prev,
-      [specsName]: stringifyObject,
-    }));
+    updateFormData();
   };
 
   const renderSpecs = () =>
     specsList.map((_, i, arr) => (
-      <>
+      <div className="row" key={i}>
         <div className="col-lg-6 mb-3">
           <TextField
-            key={i}
             className="category-seo-title"
             label={`Характерситика ${i + 1}`}
             variant="outlined"
@@ -60,7 +70,6 @@ function FeaturesInfo({
         </div>
         <div className="col-lg-5 mb-3">
           <TextField
-            key={i}
             className="category-seo-title"
             label={`Значение ${i + 1}`}
             variant="outlined"
@@ -80,7 +89,7 @@ function FeaturesInfo({
             Удалить
           </Button>
         </div>
-      </>
+      </div>
     ));
 
   return (

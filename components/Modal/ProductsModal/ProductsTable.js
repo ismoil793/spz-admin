@@ -15,12 +15,16 @@ import Link from "next/link";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { useRouter } from "next/router";
 import keys from "../../../api/constants";
 import { deleteProduct } from "../../../store/actions/product";
 
-function ProductsTable() {
+function ProductsTable({ activeSubCategoryId }) {
   const { products } = useSelector((state) => state.product);
   const dispatch = useDispatch();
+
+  const { query } = useRouter();
 
   const handleProductDelete = async (id) => {
     await dispatch(deleteProduct(id));
@@ -54,9 +58,13 @@ function ProductsTable() {
             <Link
               href={{
                 pathname: `/product/edit/[id]`,
-                query: { id: product.id },
+                query: {
+                  id: product.id,
+                  parentID: activeSubCategoryId,
+                  categoryID: query.id,
+                },
               }}
-              as={`/product/edit/${product.id}`}
+              as={`/product/edit/${product.id}?parentID=${activeSubCategoryId}&categoryID=${query.id}`}
             >
               <a>
                 <Tooltip title="Просмотр/Изменить">
@@ -89,7 +97,7 @@ function ProductsTable() {
       <div className="row">
         <div className="col-lg-12">
           <TableContainer component={Paper} className="clinet-table">
-            <Table className="category-table">
+            <Table className="category-table products">
               <TableHead>
                 <TableRow>
                   <TableCell>ID</TableCell>
@@ -115,5 +123,12 @@ function ProductsTable() {
     </div>
   );
 }
+
+ProductsTable.propTypes = {
+  activeSubCategoryId: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
+};
 
 export default ProductsTable;

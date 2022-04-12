@@ -17,7 +17,11 @@ const Editor = dynamic(
   { ssr: false }
 );
 
-export default function TextEditor({ setEditorHTML, defaultState = "" }) {
+export default function TextEditor({
+  setEditorHTML,
+  defaultState = "",
+  isEdit,
+}) {
   // const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [contentState, setContentState] = useState(null);
   const [isDefaultApplied, setDefaultApplied] = useState(false);
@@ -34,6 +38,14 @@ export default function TextEditor({ setEditorHTML, defaultState = "" }) {
       setDefaultApplied(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (defaultState.length && !isDefaultApplied && isEdit) {
+      const contentObject = JSON.parse(defaultState);
+      setContentState(contentObject[0] || "");
+      setDefaultApplied(true);
+    }
+  }, [defaultState]);
 
   const onContentStateChange = (val) => {
     setEditorHTML((prev) => [val, prev[1]]);
@@ -57,4 +69,5 @@ export default function TextEditor({ setEditorHTML, defaultState = "" }) {
 TextEditor.propTypes = {
   setEditorHTML: PropTypes.func.isRequired,
   defaultState: PropTypes.string,
+  isEdit: PropTypes.bool,
 };
