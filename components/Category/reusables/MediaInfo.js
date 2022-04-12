@@ -3,12 +3,19 @@ import { IconButton } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { styled } from "@mui/material/styles";
 import PropTypes from "prop-types";
+import keys from "../../../api/constants";
 
 const Input = styled("input")({
   display: "none",
 });
 
-function MediaInfo({ formData = {}, setFormData, isSubCategory, isProduct }) {
+function MediaInfo({
+  formData = {},
+  setFormData,
+  isSubCategory,
+  isProduct,
+  // isEdit,
+}) {
   const { imageUrl } = formData;
 
   const handleImageUpload = (e) => {
@@ -34,8 +41,10 @@ function MediaInfo({ formData = {}, setFormData, isSubCategory, isProduct }) {
   const renderImageUploader = (name, btnLabel = "") => {
     let src = "https://via.placeholder.com/500x400";
 
-    if (formData[name]) {
+    if (formData[name] && typeof formData[name] === "object") {
       src = URL.createObjectURL(formData[name]);
+    } else if (typeof formData[name] === "string" && formData[name].length) {
+      src = `${keys.BASE_URL}/${formData[name]}`;
     }
 
     return (
@@ -140,6 +149,7 @@ MediaInfo.propTypes = {
   setFormData: PropTypes.func,
   isSubCategory: PropTypes.bool,
   isProduct: PropTypes.bool,
+  // isEdit: PropTypes.bool,
 };
 
 export default MediaInfo;

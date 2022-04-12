@@ -14,6 +14,8 @@ export function arr2obj(arr) {
 export const fileNotChanged = (formDataKey, keysValue) => {
   const imagesArray = [
     "image",
+    "gost_image",
+    "chertej_image",
     "gost_image[0]",
     "gost_image[1]",
     "chertej_image[0]",

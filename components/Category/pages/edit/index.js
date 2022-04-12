@@ -22,39 +22,17 @@ function CategoryEdit({
   const defaultProps = {
     formData,
     setFormData,
+    isSubCategory,
+    isProduct,
+    isEdit,
   };
 
   return (
     <>
-      {(isSubCategory || isProduct) && (
-        <ParentCategoryInfo
-          formData={formData}
-          setFormData={setFormData}
-          isSubCategory={isSubCategory}
-          isProduct={isProduct}
-        />
-      )}
-      {mounted && (
-        <CategoryInfo
-          {...defaultProps}
-          isProduct={isProduct}
-          isSubCategory={isSubCategory}
-        />
-      )}
-      <MediaInfo
-        isSubCategory={isSubCategory}
-        isProduct={isProduct}
-        isEdit={isEdit}
-        {...defaultProps}
-      />
-      {isSubCategory || isProduct ? (
-        <FeaturesInfo
-          isProduct={isProduct}
-          isSubCategory={isSubCategory}
-          formData={formData}
-          setFormData={setFormData}
-        />
-      ) : null}
+      {(isSubCategory || isProduct) && <ParentCategoryInfo {...defaultProps} />}
+      {mounted && <CategoryInfo {...defaultProps} />}
+      <MediaInfo {...defaultProps} />
+      {isSubCategory || isProduct ? <FeaturesInfo {...defaultProps} /> : null}
 
       <SeoInfo {...defaultProps} />
     </>

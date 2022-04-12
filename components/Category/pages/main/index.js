@@ -26,7 +26,7 @@ function CategoryMainPage({ isSubCategory, data, handleDelete, parentID }) {
   const [isProductsModalOpen, setProductsModalOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState(null);
 
-  const path = isSubCategory ? "/sub-category" : "/category/edit";
+  const path = isSubCategory ? "/sub-category/edit" : "/category/edit";
 
   const toggleDeleteModal = (id) => {
     if (isDeleteModalOpen) {
@@ -104,9 +104,11 @@ function CategoryMainPage({ isSubCategory, data, handleDelete, parentID }) {
             <Link
               href={{
                 pathname: `${path}/[id]`,
-                query: { id: cat.id },
+                query: { id: cat.id, parentID },
               }}
-              as={`${path}/${cat.id}`}
+              as={`${path}/${cat.id}${
+                isSubCategory ? `?parentID=${parentID}` : ""
+              }`}
             >
               <a>
                 <Tooltip title="Просмотр/Изменить">
