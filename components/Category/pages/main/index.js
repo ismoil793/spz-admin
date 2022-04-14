@@ -205,7 +205,7 @@ function CategoryMainPage({ isSubCategory, data, handleDelete, parentID }) {
 CategoryMainPage.propTypes = {
   isSubCategory: PropTypes.bool,
   parentID: PropTypes.bool,
-  data: PropTypes.shape([]),
+  data: PropTypes.arrayOf(PropTypes.shape({})),
   handleDelete: PropTypes.func,
 };
 

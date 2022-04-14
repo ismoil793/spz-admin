@@ -53,11 +53,19 @@ httpClient.interceptors.response.use(
     }
 
     if (parseInt(status, 10) === 400) {
-      notifyError("Неверные данные, убедитесь что все поля заполнены");
+      notifyError(
+        "Неверные данные, убедитесь что все поля заполнены\nМинимальное число символов 3"
+      );
     }
 
     if (parseInt(status, 10) === 404) {
       notifyWarn(data.message);
+    }
+
+    if (parseInt(status, 10) === 413) {
+      notifyWarn(
+        "Серве! \nРазмер файла не должен составлять более 1 мегабайта"
+      );
     }
 
     if (parseInt(status, 10) === 429) {
