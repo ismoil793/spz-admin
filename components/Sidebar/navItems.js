@@ -82,7 +82,7 @@ function NavItems() {
       {renderNavItems(navItemsFooter)}
       <Link href="/login">
         <a style={{ marginTop: "auto", marginBottom: 10 }}>
-          <ListItem button onClick={() => cookies.remove("admin-sign-in")}>
+          <ListItem button onClick={() => cookies.remove("vZDA92AO3e0g")}>
             <ListItemIcon>
               <Logout />
             </ListItemIcon>
