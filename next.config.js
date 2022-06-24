@@ -12,12 +12,8 @@ module.exports = {
     API_TOKEN: "$2a$12$9o.c7thWW10m1PCtmDvto.DEoRn1Pye7jfU0vtXuJZJl02lij2sRy",
     allowedUsers: [
       {
-        uName: "trast@admin.uz",
+        uName: "admin@spz-bearings.uz",
         password: "vZDA92AO3e0g",
-      },
-      {
-        uName: "test",
-        password: "test",
       },
     ],
   },
