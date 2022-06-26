@@ -27,6 +27,11 @@ export const fetchProducts = (subCategoryID) => async (dispatch) => {
             });
           }
         );
+      } else {
+        dispatch({
+          type: action.FETCH_PRODUCTS,
+          payload: products,
+        });
       }
     })
     .catch((e) => logRequestError(e));
