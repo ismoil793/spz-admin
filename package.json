@@ -56,6 +56,10 @@
     "prettier": "^2.6.2",
     "sass": "^1.49.7"
   },
+  "engines": {
+    "npm": "8.1.2",
+    "node": "16.13.2"
+  },
   "lint-staged": {
     "*.js": [
       "prettier --write",
